@@ -352,6 +352,7 @@
 ;;; Components
 
 (defn toggle-el
+  ;; :block は 
   [{:block/keys [open uid children]} state linked-ref]
   (if (seq children)
     [:button (use-style block-disclosure-toggle-style
@@ -828,6 +829,7 @@
   ([block]
    [block-el block {:linked-ref false}])
   ([_block linked-ref-data]
+   ;; [{:keys [linked-ref]} linked-ref-data] => linked-ref-data の :liked-ref を key とする value を linked-ref で取得できる
    (let [{:keys [linked-ref initial-open linked-ref-uid parent-uids]} linked-ref-data
          state (r/atom {:string/local      nil
                         :string/previous   nil
@@ -845,6 +847,8 @@
                         :linked-ref/open (or (false? linked-ref) initial-open)})]
 
      (fn [block linked-ref-data]
+       ;; :block/uid という形式で dsdb から取得してきている
+       ;; 階層型のkeyword という理解
        (let [{:block/keys [uid string open children _refs]} block
              {:search/keys [] :keys [dragging drag-target]} @state
              is-editing  @(subscribe [:editing/is-editing uid])

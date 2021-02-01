@@ -17,6 +17,11 @@
 
 ;; -- re-frame -----------------------------------------------------------
 
+;; 529 : re-frame db app-db の事
+;; 529 : ブラウザのローカルストレージにデータがあるのかな？
+;; 529 : おそらく起動毎にリセットされる気もします
+;; 529 : datascript の データとはまた異なるという理解。アプリケーションの状態を保持する map
+;; 529 index.transit とうファイルにデータ部分は保存されていて、このrfdb はchache だと思う
 (defonce rfdb {:user                "Socrates"
                :db/filepath         nil
                :db/synced           true

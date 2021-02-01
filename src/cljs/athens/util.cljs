@@ -11,6 +11,8 @@
   []
   (subs (str (random-uuid)) 27))
 
+(gen-block-uid)
+(js/console.log "hogehoge")
 
 ;; -- DOM ----------------------------------------------------------------
 
@@ -133,7 +135,6 @@
 (def US-format (t/formatter "MM-dd-yyyy"))
 (def title-format (t/formatter "LLLL dd, yyyy"))
 
-
 (defn now-ts
   []
   (-> (js/Date.) .getTime))
@@ -175,6 +176,12 @@
           rejoin (string/join "-" [y m d])]
       (t/date rejoin))
     (catch js/Object _ nil)))
+
+(comment
+  (now-ts)
+  (get-day -2)
+  (uid-to-date (:uid (get-day 1)))
+  )
 
 
 (defn is-timeline-page

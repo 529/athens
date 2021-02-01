@@ -15,6 +15,7 @@
 ;; -- re-frame app-db events ---------------------------------------------
 
 (reg-event-db
+  ;; 529 db/rfdb の初期化
   :init-rfdb
   (fn-traced [_ _]
              db/rfdb))
@@ -351,6 +352,10 @@
 
 
 (reg-event-fx
+ ;; 529 : http通信している？
+ ;; うーんでも、https://github.com/day8/re-frame-http-fx
+ ;; これではなさそうだからな違うかな
+ ;; effects.cljs :http が定義されていて、ここで通信をしているようです
   :http/get-db
   (fn [_ _]
     {:http {:method :get
@@ -383,6 +388,7 @@
 
 
 (reg-event-fx
+ ;; 529 dark mode は localstorage に保存しているぽい
   :local-storage/set-theme
   [(inject-cofx :local-storage "theme/dark")]
   (fn [{:keys [local-storage db]} _]
@@ -393,6 +399,8 @@
 
 
 (reg-event-fx
+ ;; 529 ここで dark mode 切り替えをしている
+ ;; :db, :local-storage/set!などは effects.cljs で定義されている
   :theme/toggle
   (fn [{:keys [db]} _]
     (let [dark?    (:theme/dark db)

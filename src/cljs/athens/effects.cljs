@@ -261,6 +261,8 @@
 
 
 (reg-fx
+ ;; 529 clojure.core.async go 非同期処理
+ ;; cljs-http.client というライブラリを使っていうr
   :http
   (fn [{:keys [url method opts on-success on-failure]}]
     (go
